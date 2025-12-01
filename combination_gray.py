@@ -192,7 +192,7 @@ def gen5_8(l, n, k):
             neg(n-2, k-2)
             swap(k-1, n-1, k, n)
             gen(n-2, k-1)
-            swap(n-1, n, k, n)
+            swap(n, n-1, k, n)
             neg(n-1, k)
 
         else:
