@@ -164,9 +164,11 @@ def gen5_8(l, n, k):
     for i in range(0, n - k):
         res.append(0)
 
+    result = set()
     def print_res(k, n):
 
         ans = [l[index] for index, i in enumerate(res[1:]) if i == 1]
+        result.add(tuple(res[:]))
         print(ans, res[1:])
 
     def gen(n, k):
@@ -206,6 +208,7 @@ def gen5_8(l, n, k):
 
     print_res(k, n)
     gen(n, k)
+    print(len(result))
 
 
 
@@ -219,13 +222,17 @@ def gen5_9(l, n, k):
         res.append(1)
     res.append(0)
 
-
+    result = set()
     def swap(i, j):
         res[i], res[j] = res[j], res[i]
         print_res(k, n)
 
+
+
     def print_res(k, n):
-        print(res[1:n+1])
+        ans = [l[index] for index, i in enumerate(res[1:]) if i == 1]
+        result.add(tuple(res[:]))
+        print(ans, res[1:])
 
     def gen(n, k, p):  
         if p == 1:
@@ -246,7 +253,7 @@ def gen5_9(l, n, k):
     def neg(n, k, p):
         if p == 1:
             if k == n - 1: 
-                for i in range(n-1, 0, -1):
+                for i in range(1, n):
                     swap(i, i+1)
             else:
                 if k > 0 and k < n - 1:
@@ -259,12 +266,13 @@ def gen5_9(l, n, k):
                 swap(n-1, n)
                 neg(n-1, k, 1)
 
-    print(res[1:n+1])
+    print_res(k, res[1:n+1])
     gen(n, k, 1)
+    print(len(result))
 
 
 if __name__ == "__main__":
-    l = ['1', '2', '3', '4', '5', '6']
+    l = list(range(1, 11))
 
 
     # print('-------')
@@ -278,16 +286,13 @@ if __name__ == "__main__":
     for i in range(10):
         unrank_lex(5, 3, i)  # This is from index = 
     print("------")
-    # unrank_colex(3, 4)  # This is from index = 0
-    # unrank_lex(5, 3, 4)
-    # genA0(l, 5, 3)
-    # trans_inter(5, 3)
+
 
     genB0(l, 6, 3)  # is ok
     print('-------')
     # print('-------')
     trans_inter5_7(6, 3)
-    # print('--------')
-    gen5_8(l, 6, 3)
-    # print('--------')
-    gen5_9(l, 6, 3)
+    print('gen5_8 --------------')
+    gen5_8(l, 8, 3)
+    print('gen5_9 --------------')
+    gen5_9(l, 8, 3)
